@@ -9,8 +9,8 @@ public class RadixSort {
         // Determine the integer with the most digits (EX: 100 = 3 digits)
         int max = Collections.max(Arrays.asList(arr));
 
-        // Loops through array based on max # of digits determined by line 10
-        // EX: 100 = loops 3 times. 1000 = loops 4 times, etc
+        // Loops per digit place (e.g. ones, tens, hundreds)
+        // EX: if max = 100 then loops 3 times. 1000 = loops 4 times, etc
         for (int exp = 1; max / exp > 0; exp *= RADIX) {
             countingSortByDigit(arr, exp);
         }
@@ -19,10 +19,10 @@ public class RadixSort {
     // Count sort method that sorts by digit in 1s, 10s, 100s place
     private static void countingSortByDigit(Integer[] arr, int exp) {
         int n = arr.length;
-        Integer[] output = new Integer[n]; // Temporary container to store sorting result
-        int[] count = new int[10]; // Size 10 for digits 0-9
+        Integer[] output = new Integer[n]; // Temporary array for sorted values
+        int[] count = new int[10]; // Count array for digits 0-9
 
-        // Count occurences
+        // Count occurences of digits in each digit place
         for (int i = 0; i < n; i++) {
             int digit = (arr[i] / exp) % 10;
             count[digit]++;
@@ -33,7 +33,7 @@ public class RadixSort {
             count[i] += count[i - 1];
         }
 
-        // Loops through original array backwards to maintain order/stability
+        // Builds output array in reverse to maintain proper sorting order
         for (int i = n - 1; i >= 0; i--) {
             int digit = (arr[i] / exp) % 10;
             output[count[digit] - 1] = arr[i];
