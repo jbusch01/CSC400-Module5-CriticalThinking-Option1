@@ -28,7 +28,7 @@ public class RadixSort {
             count[i] += count[i - 1];
         }
 
-        System.out.println("\nCount array after accumulation for exp = " + exp + ": " + Arrays.toString(count) + "\n");
+        System.out.println("\nCount array after accumulation for exp = " + exp + ": " + Arrays.toString(count));
         
         for (int i = n - 1; i >= 0; i--) {
             output[count[(arr[i] / exp) % 10] - 1] = arr[i];
