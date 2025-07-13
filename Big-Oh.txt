@@ -1,0 +1,33 @@
+Big-Oh Evaluation
+
+Time Complexity = O(n*k).
+Space Complexity = O(n).
+
+n = number of elements in array.
+k = number of digits in largest number.
+b = base used (base 10).
+
+int max = Collections.max(AArrays.asList(arr));
+This piece scans the whole array (Integer[] data) for the
+largest number of digits in each element, giving us O(n).
+
+for (int exp = 1; max / exp > 0; exp *= RADIX)
+This loop runs once for the determined number of digits in
+the largest element (e.g. 783 is the largest, so the loop
+will run 3 times), giving us O(n).
+
+private static void countingSortByDigit(Integer[] arr, int exp)
+This method loops through the Integer[] arr 3 times, sorting
+by the 1s, 10s, and then 100s place, giving us O(n).
+I initially thought this would be O(n^2), but since these are
+not nested loops, it only gives us O(n).
+
+Since we're looping through the 1s place n times, the 10-s
+place n times, and the 100s place n times, then O(k) runs
+3 times, through n elements, giving us O(n) * O(k).
+
+Simplified, we get a final time complexity of O(n*k).
+
+The Space Complexity is more simple, as the output array
+is O(n), and the count array is fixed at 10, making it a
+constant O(1). We drop constants, giving us O(n).
